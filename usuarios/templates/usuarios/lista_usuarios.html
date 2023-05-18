@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Usuários Cadastrados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #42a5f5, #a5d6a7);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .email,
+    .cidade {
+      flex: 1;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .email {
+      font-weight: bold;
+    }
+
+    .cidade {
+      color: #777;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      background-color: #42a5f5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .button:hover {
+      background-color: #1e88e5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Lista de Usuários Cadastrados</h2>
+    <div class="row">
+      <div class="email">
+        <h3>Email</h3>
+        <ul>
+          {% for usuario in usuarios %}
+            <li>{{ usuario.email }}</li>
+          {% empty %}
+            <li>Nenhum usuário cadastrado.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="cidade">
+        <h3>Cidade</h3>
+        <ul>
+          {% for usuario in usuarios %}
+            <li>{{ usuario.cidade }}</li>
+          {% empty %}
+            <li>Nenhum usuário cadastrado.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button" onclick="alterarDados()">Alterar Dados</button>
+      <button class="button" onclick="excluirDados()">Excluir Dados</button>
+    </div>
+  </div>
+
+  <script>
+    function alterarDados() {
+      // Lógica para alterar os dados
+      var email = prompt("Digite o novo email:");
+      var cidade = prompt("Digite a nova cidade:");
+
+      // Aqui você pode implementar o código para atualizar os dados no servidor ou realizar outras ações necessárias
+
+      // Exemplo de exibição dos novos dados na página
+      var emailElement = document.querySelectorAll('.email li');
+      var cidadeElement = document.querySelectorAll('.cidade li');
+
+      for (var i = 0; i < emailElement.length; i++) {
+        emailElement[i].innerText = email;
+      }
+
+      for (var j = 0; j < cidadeElement.length; j++) {
+        cidadeElement[j].innerText = cidade;
+      }
+    }
+
+    function excluirDados() {
+      // Lógica para excluir os dados
+      if (confirm("Tem certeza de que deseja excluir os dados?")) {
+        // Aqui você pode implementar o código para excluir os dados no servidor ou realizar outras ações necessárias
+
+        // Exemplo de remoção dos dados da página
+        var emailElement = document.querySelectorAll('.email li');
+        var cidadeElement = document.querySelectorAll('.cidade li');
+
+        for (var i = 0; i < emailElement.length; i++) {
+          emailElement[i].remove();
+        }
+
+        for (var j = 0; j < cidadeElement.length; j++) {
+          cidadeElement[j].remove();
+        }
+      }
+    }
+  </script>
+</body>
+</html>
